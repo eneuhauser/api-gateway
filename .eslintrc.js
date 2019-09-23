@@ -4,10 +4,14 @@ module.exports = {
         "jest/globals": true
     },
     "extends": [
-        "prettier",
+        "airbnb-base",
+        "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended",
-        "prettier/@typescript-eslint"
+        // If enabled, add "eslint-plugin-react" to package.json
+        //"plugin:react/recommended",
+        "prettier",
+        "prettier/@typescript-eslint",
+        //"prettier/react"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -17,53 +21,12 @@ module.exports = {
     "plugins": ["@typescript-eslint", "prettier", "jest"],
     "rules": {
         "prettier/prettier": "error",
-        "no-buffer-constructor": 0,
-        "no-useless-constructor": 0,
-        "no-use-before-define": [
-            "error", {
-                "functions": false
-            }
-        ],
-        "indent": [
-            "error",
-            // NestJS Standard
-            2
-        ],
+        // C2FO Preference
         "func-names": ["error", "always"],
-        "object-curly-spacing": [ "error", "always" ],
-        //NestJS Standard
-        //"array-bracket-spacing": [ "error", "always" ],
-        "comma-dangle": ["error", {
-            "arrays": "always-multiline",
-            "objects": "always-multiline",
-            "imports": "always-multiline",
-            "exports": "always-multiline",
-            "functions": "never"
-        }],
-        "class-methods-use-this": 0,
-        "prefer-destructuring": 0,
-        "prefer-rest-params": 0,
-        "prefer-spread": 0,
-        "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
-        "arrow-body-style": 0,
-        "strict": [
-            "error",
-            "global"
-        ],
-        "no-underscore-dangle": 0,
-        "no-plusplus": [
-            "error",
-            {
-                "allowForLoopAfterthoughts": true
-            }
-        ],
-        "no-param-reassign": [
-            "error",
-            {
-                "props": false
-            }
-        ],
-        "no-shadow": ["error", {"allow": ["it"]}],
+
+        // Nest Standard
+        "indent": ["error", 2],
+
         // overriding default length from 100 to 120; all other existing options must also be specified in the override
         // base: https://github.com/airbnb/javascript/blob/eslint-config-airbnb-v13.0.0/packages/eslint-config-airbnb-base/rules/style.js#L128
         "max-len": ["error", 120, 2, {
@@ -73,7 +36,16 @@ module.exports = {
             ignoreRegExpLiterals: true,
             ignoreStrings: true,
             ignoreTemplateLiterals: true,
-        }]
+        }],
+
+        // Just not practical
+        "class-methods-use-this": 0,
+        // Needed for Nest injection
+        "no-useless-constructor": 0,
+        // Needed to import Nest Testing
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.spec.ts"]}],
+        // Standard Nest class definition
+        "import/prefer-default-export": 0
     },
     "settings": {
         "import/extensions": [".ts"],
