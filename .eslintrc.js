@@ -21,6 +21,7 @@ module.exports = {
     "plugins": ["@typescript-eslint", "prettier", "jest"],
     "rules": {
         "prettier/prettier": "error",
+
         // C2FO Preference
         "func-names": ["error", "always"],
 
